@@ -4,9 +4,10 @@
  */
 package RetosCiclo4.RevistaCatalogoCenicienta.controllers;
 
-import RetosCiclo4.RevistaCatalogoCenicienta.models.UserModel;
-import RetosCiclo4.RevistaCatalogoCenicienta.services.UserService;
+import RetosCiclo4.RevistaCatalogoCenicienta.models.CleaningProductModel;
+import RetosCiclo4.RevistaCatalogoCenicienta.services.CleaningProductService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,44 +27,39 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jaime López Patiño
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/cleaningproduct")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-
-public class UserController {
+public class CleaningProductController {
 
     @Autowired
-    private UserService userService;
+    private CleaningProductService cleaningProductService;
 
     @GetMapping("/all")
-    public List<UserModel> listAll() {
-        return userService.listAll();
+    public List<CleaningProductModel> listAll() {
+        return cleaningProductService.listAll();
+    }
+
+    @GetMapping("/{reference}")
+    public Optional<CleaningProductModel> getCleaningProduct(@PathVariable("reference") String reference) {
+        return cleaningProductService.getCleaningProduct(reference);
     }
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel create(@RequestBody UserModel userModel) {
-        return userService.create(userModel);
+    public CleaningProductModel create(@RequestBody CleaningProductModel cleaningProductModel) {
+        return cleaningProductService.create(cleaningProductModel);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel update(@RequestBody UserModel userModel) {
-        return userService.update(userModel);
+    public CleaningProductModel update(@RequestBody CleaningProductModel gadget) {
+        return cleaningProductService.update(gadget);
     }
 
-    @GetMapping("/emailexist/{email}")
-    public boolean existeEmail(@PathVariable("email") String email) {
-        return userService.existeEmail(email);
-    }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{reference}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int id) {
-        return userService.delete(id);
-    }
-
-    @GetMapping("/{email}/{password}")
-    public UserModel autenticarUsuario(@PathVariable("email") String email, @PathVariable("password") String password) {
-        return userService.autenticarUsuario(email, password);
+    public boolean delete(@PathVariable("reference") String reference) {
+        return cleaningProductService.delete(reference);
     }
 
 }

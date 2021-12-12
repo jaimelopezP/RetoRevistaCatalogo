@@ -21,17 +21,27 @@ public class UserRepository {
     @Autowired
     private IUserCrudRepository userCrudRepository;
 
-    public List<UserModel> getall() {
-        return (List<UserModel>) userCrudRepository.findAll();
+    public List<UserModel> listAll() {
+        return userCrudRepository.findAll();
     }
 
     public Optional<UserModel> getUser(int id) {
         return userCrudRepository.findById(id);
     }
 
-    public UserModel save(UserModel userModel) {
+    public UserModel create(UserModel userModel) {
         return userCrudRepository.save(userModel);
     }
+    
+    public void update(UserModel userModel) {
+        userCrudRepository.save(userModel);
+    }
+
+    public void delete(UserModel userModel) {
+        userCrudRepository.delete(userModel);
+    }
+    
+    
 
     public boolean existeEmail(String email) {
         Optional<UserModel> usuario = userCrudRepository.findByEmail(email);

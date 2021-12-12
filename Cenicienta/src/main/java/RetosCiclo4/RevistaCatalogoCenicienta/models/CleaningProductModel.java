@@ -14,21 +14,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author Jaime López Patiño
  */
-@Document(collection = "users")
+@Document(collection = "cleaningproducts")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserModel {
-
+public class CleaningProductModel {
     @Id
-    private Integer id;
-    private String identification;
-    private String name;
-    private String address;
-    private String cellPhone;
-    private String email;
-    private String password;
-    private String zone;
-    private String type;
+    private String reference;
+    private String brand;
+    private String category;
+    private String material;
+    private String presentacion;
+    private String description;
+    private boolean availability = true;
+    private double price;
+    private int quantity;
+    private String photography;    
 }
