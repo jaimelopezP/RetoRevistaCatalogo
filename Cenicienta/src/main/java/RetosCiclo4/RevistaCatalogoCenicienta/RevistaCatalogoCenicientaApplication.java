@@ -1,6 +1,7 @@
 package RetosCiclo4.RevistaCatalogoCenicienta;
 
 import RetosCiclo4.RevistaCatalogoCenicienta.interfaces.ICleaningProductCrudRepository;
+import RetosCiclo4.RevistaCatalogoCenicienta.interfaces.IOrderCrudRepository;
 import RetosCiclo4.RevistaCatalogoCenicienta.interfaces.IUserCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +17,8 @@ public class RevistaCatalogoCenicientaApplication implements CommandLineRunner {
     private IUserCrudRepository userCrudRepository;
     @Autowired
     private ICleaningProductCrudRepository cleaningProductCrudRepository;
+    @Autowired
+    private IOrderCrudRepository orderCrudRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(RevistaCatalogoCenicientaApplication.class, args);
@@ -25,6 +28,7 @@ public class RevistaCatalogoCenicientaApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         userCrudRepository.deleteAll();
         cleaningProductCrudRepository.deleteAll();
+        orderCrudRepository.deleteAll();
 
     }
 

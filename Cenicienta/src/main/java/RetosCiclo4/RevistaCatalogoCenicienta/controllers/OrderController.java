@@ -4,8 +4,8 @@
  */
 package RetosCiclo4.RevistaCatalogoCenicienta.controllers;
 
-import RetosCiclo4.RevistaCatalogoCenicienta.models.UserModel;
-import RetosCiclo4.RevistaCatalogoCenicienta.services.UserService;
+import RetosCiclo4.RevistaCatalogoCenicienta.models.OrderModel;
+import RetosCiclo4.RevistaCatalogoCenicienta.services.OrderService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,50 +27,43 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jaime López Patiño
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/order")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-
-public class UserController {
+public class OrderController {
 
     @Autowired
-    private UserService userService;
+    private OrderService orderService;
 
     @GetMapping("/all")
-    public List<UserModel> listAll() {
-        return userService.listAll();
+    public List<OrderModel> getAll() {
+        return orderService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<UserModel> getUser(@PathVariable("id") int id) {
-        return userService.getUser(id);
+    public Optional<OrderModel> getOrder(@PathVariable("id") int id) {
+        return orderService.getOrder(id);
     }
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel create(@RequestBody UserModel userModel) {
-        return userService.create(userModel);
+    public OrderModel create(@RequestBody OrderModel gadget) {
+        return orderService.create(gadget);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel update(@RequestBody UserModel userModel) {
-        return userService.update(userModel);
-    }
-
-    @GetMapping("/emailexist/{email}")
-    public boolean existeEmail(@PathVariable("email") String email) {
-        return userService.existeEmail(email);
+    public OrderModel update(@RequestBody OrderModel gadget) {
+        return orderService.update(gadget);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) {
-        return userService.delete(id);
+        return orderService.delete(id);
     }
 
-    @GetMapping("/{email}/{password}")
-    public UserModel autenticarUsuario(@PathVariable("email") String email, @PathVariable("password") String password) {
-        return userService.autenticarUsuario(email, password);
+    @GetMapping("/zona/{zona}")
+    public List<OrderModel> findByZone(@PathVariable("zona") String zona) {
+        return orderService.findByZone(zona);
     }
-
 }

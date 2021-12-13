@@ -32,7 +32,7 @@ public class UserRepository {
     public UserModel create(UserModel userModel) {
         return userCrudRepository.save(userModel);
     }
-    
+
     public void update(UserModel userModel) {
         userCrudRepository.save(userModel);
     }
@@ -40,8 +40,6 @@ public class UserRepository {
     public void delete(UserModel userModel) {
         userCrudRepository.delete(userModel);
     }
-    
-    
 
     public boolean existeEmail(String email) {
         Optional<UserModel> usuario = userCrudRepository.findByEmail(email);
@@ -53,4 +51,7 @@ public class UserRepository {
         return userCrudRepository.findByEmailAndPassword(email, password);
     }
 
+    public Optional<UserModel> lastUserId() {
+        return userCrudRepository.findTopByOrderByIdDesc();
+    }
 }
