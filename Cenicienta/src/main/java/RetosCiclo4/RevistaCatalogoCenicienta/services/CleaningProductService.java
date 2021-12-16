@@ -80,4 +80,8 @@ public class CleaningProductService {
         return aBoolean;
     }
 
+    public List<CleaningProductModel> productByPrice(double price) {
+        return cleaningProductRepository.productByPrice(price);
+    }
+
 }

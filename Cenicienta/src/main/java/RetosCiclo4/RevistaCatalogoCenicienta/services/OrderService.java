@@ -82,5 +82,19 @@ public class OrderService {
     public List<OrderModel> findByZone(String zona) {
         return orderRepository.findByZone(zona);
     }
+    //Ordenes de un asesor
+    public List<OrderModel> ordersSalesManByID(int id) {
+        return orderRepository.ordersSalesManByID(id);
+    }
+    
+    //Ordenes de un asesor x Fecha
+    public List<OrderModel> ordersSalesManByDate(String dateStr, int id) {
+        return orderRepository.ordersSalesManByDate(dateStr, id);
+    }
+    
+    //Ordenes de un asesor x Estado
+    public List<OrderModel> ordersSalesManByState(String state, Integer id) {
+        return orderRepository.ordersSalesManByState(state, id);
+    }
 
 }

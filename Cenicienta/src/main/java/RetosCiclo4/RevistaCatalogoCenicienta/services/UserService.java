@@ -27,21 +27,26 @@ public class UserService {
 
     public UserModel create(UserModel userModel) {
 
+        Optional<UserModel> UserIdMaximo = userRepository.lastUserId();
+
         if (userModel.getId() == null) {
-            return userModel;
-        } else {
-            Optional<UserModel> e = userRepository.getUser(userModel.getId());
-            if (e.isEmpty()) {
-                if (existeEmail(userModel.getEmail()) == false) {
-                    return userRepository.create(userModel);
-                } else {
-                    return userModel;
-                }
+            if (UserIdMaximo.isEmpty()) {
+                userModel.setId(1);
             } else {
-                return userModel;
+                userModel.setId(UserIdMaximo.get().getId() + 1);
             }
         }
 
+        Optional<UserModel> e = userRepository.getUser(userModel.getId());
+        if (e.isEmpty()) {
+            if (existeEmail(userModel.getEmail()) == false) {
+                return userRepository.create(userModel);
+            } else {
+                return userModel;
+            }
+        } else {
+            return userModel;
+        }
     }
 
     public UserModel update(UserModel userModel) {
@@ -104,6 +109,10 @@ public class UserService {
         } else {
             return usuario.get();
         }
+    }
+
+    public List<UserModel> birthtDayList(String monthBirthtDay) {
+        return userRepository.birthtDayList(monthBirthtDay);
     }
 
 }

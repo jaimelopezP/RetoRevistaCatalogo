@@ -62,4 +62,9 @@ public class CleaningProductController {
         return cleaningProductService.delete(reference);
     }
 
+    @GetMapping("/price/{price}")
+    public List<CleaningProductModel> productByPrice(@PathVariable("price") double precio) {
+        return cleaningProductService.productByPrice(precio);
+    }
+
 }

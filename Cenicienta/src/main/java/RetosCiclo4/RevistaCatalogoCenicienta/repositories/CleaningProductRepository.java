@@ -42,4 +42,8 @@ public class CleaningProductRepository {
         cleaningProductCrudRepository.delete(cleaningProductModel);
     }
 
+    public List<CleaningProductModel> productByPrice(double precio) {
+        return cleaningProductCrudRepository.findByPriceLessThanEqual(precio);
+    }
+
 }

@@ -9,6 +9,7 @@ import RetosCiclo4.RevistaCatalogoCenicienta.models.UserModel;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,6 +21,9 @@ public class UserRepository {
 
     @Autowired
     private IUserCrudRepository userCrudRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<UserModel> listAll() {
         return userCrudRepository.findAll();
@@ -44,7 +48,6 @@ public class UserRepository {
     public boolean existeEmail(String email) {
         Optional<UserModel> usuario = userCrudRepository.findByEmail(email);
         return !usuario.isEmpty();
-
     }
 
     public Optional<UserModel> autenticarUsuario(String email, String password) {
@@ -54,4 +57,13 @@ public class UserRepository {
     public Optional<UserModel> lastUserId() {
         return userCrudRepository.findTopByOrderByIdDesc();
     }
+
+    public Optional<UserModel> authenticateUser(String email, String password) {
+        return userCrudRepository.findByEmailAndPassword(email, password);
+    }
+
+    public List<UserModel> birthtDayList(String monthBirthtDay) {
+        return userCrudRepository.findByMonthBirthtDay(monthBirthtDay);
+    }
+
 }

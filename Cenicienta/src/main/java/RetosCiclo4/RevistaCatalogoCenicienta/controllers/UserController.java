@@ -73,4 +73,8 @@ public class UserController {
         return userService.autenticarUsuario(email, password);
     }
 
+    @GetMapping("/birthday/{month}")
+    public List<UserModel> birthtDayList(@PathVariable("month") String monthBirthtDay) {
+        return userService.birthtDayList(monthBirthtDay);
+    }
 }
