@@ -84,4 +84,7 @@ public class CleaningProductService {
         return cleaningProductRepository.productByPrice(price);
     }
 
+    public List<CleaningProductModel> findByDescriptionLike(String description) {
+        return cleaningProductRepository.findByDescriptionLike(description);
+    }
 }

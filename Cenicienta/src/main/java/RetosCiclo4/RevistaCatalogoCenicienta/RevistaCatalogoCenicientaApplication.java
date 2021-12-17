@@ -3,6 +3,8 @@ package RetosCiclo4.RevistaCatalogoCenicienta;
 import RetosCiclo4.RevistaCatalogoCenicienta.interfaces.ICleaningProductCrudRepository;
 import RetosCiclo4.RevistaCatalogoCenicienta.interfaces.IOrderCrudRepository;
 import RetosCiclo4.RevistaCatalogoCenicienta.interfaces.IUserCrudRepository;
+import RetosCiclo4.RevistaCatalogoCenicienta.repositories.OrderRepository;
+import RetosCiclo4.RevistaCatalogoCenicienta.repositories.UserRepository;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class RevistaCatalogoCenicientaApplication implements CommandLineRunner {
     private ICleaningProductCrudRepository cleaningProductCrudRepository;
     @Autowired
     private IOrderCrudRepository orderCrudRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private OrderRepository orderRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
 

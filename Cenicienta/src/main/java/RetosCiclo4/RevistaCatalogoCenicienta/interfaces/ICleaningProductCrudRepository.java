@@ -7,6 +7,7 @@ package RetosCiclo4.RevistaCatalogoCenicienta.interfaces;
 import RetosCiclo4.RevistaCatalogoCenicienta.models.CleaningProductModel;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface ICleaningProductCrudRepository extends MongoRepository<Cleaning
 
     public List<CleaningProductModel> findByPriceLessThanEqual(double precio);
 
+    @Query("{'description':{'$regex':'?0','$options':'i'}}")
+    public List<CleaningProductModel> findByDescriptionLike(String description);
 }
